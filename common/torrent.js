@@ -1,5 +1,4 @@
-'use strict';
-
+/**   解析torrent   */
 let path = require('path'),
     _ = require('lodash'),
     bencode = require('bencode');
