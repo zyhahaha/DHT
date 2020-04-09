@@ -28,18 +28,18 @@
 // spider.listen(6339)
 
 /** download torrent */
-const util = require('util');
-const download = require('./common/download.js');
+// const util = require('util');
+// const download = require('./common/download.js');
 
-let _infohash = 'd2474e86c95b19b8bcfdb92bc12c9d44667cfa36';
-_infohash = _infohash.toUpperCase();
-let url = util.format('http://torrage.com/torrent/%s.torrent', _infohash);
-console.log(url)
+// let _infohash = 'd2474e86c95b19b8bcfdb92bc12c9d44667cfa36';
+// _infohash = _infohash.toUpperCase();
+// let url = util.format('http://torrage.com/torrent/%s.torrent', _infohash);
+// console.log(url)
 
-download(url, (err, data) => {
-    console.log('err:', err)
-    console.log('data:', data);
-})
+// download(url, (err, data) => {
+//     console.log('err:', err)
+//     console.log('data:', data);
+// })
 
 /** decode torrent */
 // const fs = require('fs');
@@ -49,12 +49,12 @@ download(url, (err, data) => {
 // console.log(torrentData);
 
 // join DHT request 
-// const spider = new (require('./lib/spider'))
+const spider = new (require('./lib/spider'))
 
-// spider.on('ensureHash', (hash, addr)=> console.log(`magnet:?xt=urn:btih:${hash}`))
+spider.on('ensureHash', (hash, addr)=> console.log(`magnet:?xt=urn:btih:${hash}`))
 
-// spider.on('unensureHash', (hash)=> console.log(hash))
+spider.on('unensureHash', (hash)=> console.log(hash))
 
-// spider.on('nodes', (nodes)=>console.log('foundNodes'))
+spider.on('nodes', (nodes)=>console.log('foundNodes'))
 
-// spider.listen(6339)
+spider.listen(6339)
