@@ -61,8 +61,13 @@
 
 /** perse hash */
 var torrentStream = require('torrent-stream');
- 
-var engine = torrentStream('magnet:?xt=urn:btih:803BABC461937D0F960299A2D8C1EAC252A69A96');
+var opt = {
+    trackers: [
+        'router.bittorrent.com:6881',
+        'dht.transmissionbt.com:6881'
+    ]
+};
+var engine = torrentStream('magnet:?xt=urn:btih:803BABC461937D0F960299A2D8C1EAC252A69A96', opt);
  
 engine.on('ready', function() {
     console.log('ready:', engine);
