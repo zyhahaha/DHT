@@ -48,13 +48,27 @@
 // torrentData = torrent(fs.readFileSync('./assets/01.torrent'));
 // console.log(torrentData);
 
-// join DHT request 
-const spider = new (require('./lib/spider'))
+/** join DHT request */
+// const spider = new (require('./lib/spider'))
 
-spider.on('ensureHash', (hash, addr)=> console.log(`magnet:?xt=urn:btih:${hash}`))
+// spider.on('ensureHash', (hash, addr)=> console.log(`magnet:?xt=urn:btih:${hash}`))
 
-// spider.on('unensureHash', (hash)=> console.log(hash))
+// // spider.on('unensureHash', (hash)=> console.log(hash))
 
-// spider.on('nodes', (nodes)=>console.log('foundNodes'))
+// // spider.on('nodes', (nodes)=>console.log('foundNodes'))
 
-spider.listen(6339)
+// spider.listen(6339)
+
+/** perse hash */
+var torrentStream = require('torrent-stream');
+ 
+var engine = torrentStream('magnet:?xt=urn:btih:803BABC461937D0F960299A2D8C1EAC252A69A96');
+ 
+engine.on('ready', function() {
+    console.log('ready:', engine);
+    engine.files.forEach(function(file) {
+        console.log('filename:', file.name);
+        var stream = file.createReadStream();
+        // stream is readable stream to containing the file content
+    });
+});
