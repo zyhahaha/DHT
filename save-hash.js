@@ -59,7 +59,7 @@ const spider = new (require('./lib/spider'))
 
 spider.on('ensureHash', (hash, addr) => {
     let content = JSON.stringify({
-        hash,
+        content: hash,
         type: 'BT'
     })
     let options = {
