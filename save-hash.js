@@ -64,7 +64,7 @@ spider.on('ensureHash', (hash, addr) => {
     })
     let options = {
         hostname: '119.96.189.81',
-        path: '/powerful',
+        path: '/powerful/bt',
         port: 8877,
         method: 'POST',
         // secureProtocol: 'SSLv3_method',
