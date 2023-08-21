@@ -37,6 +37,8 @@ exports.queryHashListFn = function queryHashListFn() {
                     const element = hashList[key];
                     // console.log(key)
                     setTimeout(() => {
+                        if (element.total_size < 0 || element.size < 0) return false
+                        
                         saveHashInfoFn(key, element.name, element.total_size || element.size, 9)
                     }, index += 300)
                 }
