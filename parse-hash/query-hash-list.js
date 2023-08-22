@@ -1,5 +1,4 @@
-const { saveHashInfoFn } = require('./save-hash-info')
-exports.queryHashListFn = function queryHashListFn() {
+exports.queryHashListFn = function queryHashListFn(hashList, callFn) {
     const http = require('http');
     let content = JSON.stringify({
         // username: 'admin',
@@ -29,7 +28,6 @@ exports.queryHashListFn = function queryHashListFn() {
             // console.log(`响应主体: ${chunk}`);
         });
         res.on('end', (res) => {
-            const hashList = []
             let hashMaps = JSON.parse(chunkstr)['torrents'] || {}
             for (const key in hashMaps) {
                 if (Object.hasOwnProperty.call(hashMaps, key)) {
@@ -38,20 +36,8 @@ exports.queryHashListFn = function queryHashListFn() {
                     element.hash = key
                     hashList.push(element)
                 }
-            }
-            
-            
-            const deepRunFn = async () => {
-                if (!hashList.length) {
-                    return;
-                };
-                let hashItem = hashList.shift()
-                saveHashInfoFn(hashItem.hash, hashItem.name, hashItem.total_size || hashItem.size, 9)
-                setTimeout(() => {
-                    deepRunFn()
-                }, 200)
-            }
-            deepRunFn()
+            }     
+            callFn && callFn()
         });
     })
     req.write(content);
