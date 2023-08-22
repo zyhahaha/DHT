@@ -29,23 +29,30 @@ exports.queryHashListFn = function queryHashListFn() {
             // console.log(`响应主体: ${chunk}`);
         });
         res.on('end', (res) => {
-            // console.log('No more data in response.', JSON.parse(chunkstr)['torrents']);
-            let hashList = JSON.parse(chunkstr)['torrents'] || {}
-            let index = 300
-            for (const key in hashList) {
-                if (Object.hasOwnProperty.call(hashList, key)) {
-                    const element = hashList[key];
-                    // console.log(key)
-                    setTimeout(() => {
-                        if (element.total_size < 0 || element.size < 0) return false
-                        
-                        saveHashInfoFn(key, element.name, element.total_size || element.size, 9)
-                    }, index += 300)
+            const hashList = []
+            let hashMaps = JSON.parse(chunkstr)['torrents'] || {}
+            for (const key in hashMaps) {
+                if (Object.hasOwnProperty.call(hashMaps, key)) {
+                    const element = hashMaps[key];
+                    if (element.total_size < 0 || element.size < 0) return false
+                    element.hash = key
+                    hashList.push(element)
                 }
             }
-            // console.log(hashList['26f74ab4cc7094f44808d4b6725907b607fc9139'])
+            
+            
+            const deepRunFn = async () => {
+                if (!hashList.length) {
+                    return;
+                };
+                let hashItem = hashList.shift()
+                saveHashInfoFn(hashItem.hash, hashItem.name, hashItem.total_size || hashItem.size, 9)
+                setTimeout(() => {
+                    deepRunFn()
+                }, 200)
+            }
+            deepRunFn()
         });
     })
     req.write(content);
-
 }
