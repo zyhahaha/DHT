@@ -32,9 +32,11 @@ exports.queryHashListFn = function queryHashListFn(hashList, callFn) {
             for (const key in hashMaps) {
                 if (Object.hasOwnProperty.call(hashMaps, key)) {
                     const element = hashMaps[key];
-                    if (element.total_size < 0 || element.size < 0) return false
-                    element.hash = key
-                    hashList.push(element)
+                    if (element.total_size < 0 || element.size < 0) {
+                    } else {
+                        element.hash = key
+                        hashList.push(element)
+                    }
                 }
             }     
             callFn && callFn()

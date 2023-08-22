@@ -3,6 +3,7 @@ const { saveHashInfoFn } = require('./save-hash-info')
 const hashList = []
 const { queryHashListFn } = require('./query-hash-list')
 queryHashListFn(hashList, () => {
+    console.log(hashList.length)
     const deepRunFn = async () => {
         if (!hashList.length) {
             return;
@@ -12,7 +13,7 @@ queryHashListFn(hashList, () => {
         setTimeout(() => {
             console.log(hashItem.hash)
             deepRunFn()
-        }, 200)
+        }, 360)
     }
     deepRunFn()
 })
