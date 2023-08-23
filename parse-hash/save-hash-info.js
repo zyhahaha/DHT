@@ -2,7 +2,7 @@ exports.saveHashInfoFn = function saveHashInfoFn(hash, name, size, status) {
     const http = require('http');
     let content = JSON.stringify({
         hash,
-        content: name,
+        content: encodeURIComponent(name),
         size,
         status
     })
