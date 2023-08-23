@@ -9,11 +9,11 @@ queryHashListFn(hashList, () => {
             return;
         };
         let hashItem = hashList.shift()
-        saveHashInfoFn(hashItem.hash, hashItem.name, hashItem.total_size || hashItem.size, 9)
+        saveHashInfoFn(hashItem.hash, hashItem.name.replaceAll("'", '"'), hashItem.total_size || hashItem.size, 9)
         setTimeout(() => {
             console.log(hashItem.hash)
             deepRunFn()
-        }, 360)
+        }, 860)
     }
     deepRunFn()
 })
