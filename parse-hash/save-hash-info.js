@@ -18,10 +18,10 @@ exports.saveHashInfoFn = function saveHashInfoFn(hash, name, size, status) {
         }
     };
     let req = http.request(options, res => {
-        // res.setEncoding('utf8');
-        // res.on('data', (chunk) => {
-        //     // console.log(`响应主体: ${chunk}`);
-        // });
+        res.setEncoding('utf8');
+        res.on('data', (chunk) => {
+            console.log(`响应主体: ${chunk}`);
+        });
     })
     req.write(content);
 }
