@@ -11,11 +11,12 @@ queryHashListFn(hashList, () => {
         let hashItem = hashList.shift()
         try {
             saveHashInfoFn(hashItem.hash, hashItem.name.replaceAll("'", '"'), hashItem.total_size || hashItem.size, 9)
-        } catch (error) {
             setTimeout(() => {
                 console.log(hashItem.hash)
                 deepRunFn()
-            }, 860)    
+            }, 860)  
+        } catch (error) {
+            deepRunFn()
         }
     }
     deepRunFn()
