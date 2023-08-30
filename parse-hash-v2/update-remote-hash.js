@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { stringifyFn } = require('./utils/index.js')
+// const { stringifyFn } = require('./utils/index.js')
 
 function updateRemoteHashFn(hash, name, size, status, nextFn) {
     const data = {
@@ -11,7 +11,7 @@ function updateRemoteHashFn(hash, name, size, status, nextFn) {
     const options = {
         url: 'http://119.96.189.81:8877/powerful/content',
         method: 'POST',
-        data: stringifyFn(data)
+        data
     };
     axios(options).then(response => {
         console.log(response.data);

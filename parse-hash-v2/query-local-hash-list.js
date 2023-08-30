@@ -7,20 +7,23 @@ const options = {
 };
 
 function queryLocalHashListFn(nextFn) {
+    const allHashList = []
+    const hashList = []
     axios(options).then(response => {
         // console.log(response.data);
         let hashMaps = response.data.torrents || {}
         for (const key in hashMaps) {
             if (Object.hasOwnProperty.call(hashMaps, key)) {
                 const element = hashMaps[key];
+                element.hash = key
+                allHashList.push(element)
                 if (element.total_size < 0 || element.size < 0) {
                 } else {
-                    element.hash = key
                     hashList.push(element)
                 }
             }
         }     
-        nextFn && nextFn()
+        nextFn && nextFn(hashList, allHashList)
     })
     .catch(error => {
         // console.log(error);
