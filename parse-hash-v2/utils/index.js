@@ -36,6 +36,6 @@ function stringifyFn(data) {
 
 module.exports = {
     stringifyFn,
-    localUrl: '${localUrl}',
+    localUrl: 'http://localhost:7788',
     remoteUrl: 'http://119.96.189.81:8877'
 }
