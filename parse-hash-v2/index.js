@@ -5,4 +5,10 @@ const addHashFn = require('./add-hash')
 const updateRemoteHashFn = require('./update-remote-hash')
 const deleteHashFn = require('./delete-hash')
 
-// queryRemoteHashListFn()
+queryRemoteHashListFn(resList => {
+    let hashListStr = ''
+    resList.forEach(hashItem => {
+        hashListStr += `${hashItem.content}\n`
+    })
+    addHashFn(hashListStr)
+})
