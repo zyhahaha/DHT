@@ -8,7 +8,7 @@ function queryRemoteHashListFn(nextFn) {
     const options = {
         url: `${remoteUrl}/powerful/list`,
         method: 'POST',
-        data: { pageIndex, pageSize: 300, hot_count: 12 }
+        data: { pageIndex, pageSize: 300, hot_count: 9 }
     };
     axios(options).then(response => {
         nextFn && nextFn(response.data.data.list)
