@@ -1,7 +1,7 @@
 const axios = require('axios')
 const { stringifyFn } = require('./utils/index.js')
 
-function queryRemoteHashListFn(hash, name, size, status, nextFn) {
+function updateRemoteHashFn(hash, name, size, status, nextFn) {
     const data = {
         hash,
         content: encodeURIComponent(name), // decodeURIComponent
@@ -22,4 +22,4 @@ function queryRemoteHashListFn(hash, name, size, status, nextFn) {
     })    
 }
 
-module.exports = queryRemoteHashListFn
+module.exports = updateRemoteHashFn
