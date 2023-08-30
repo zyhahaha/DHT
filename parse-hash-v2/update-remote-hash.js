@@ -14,11 +14,10 @@ function updateRemoteHashFn(hash, name, size, status, nextFn) {
         data
     };
     axios(options).then(response => {
-        // console.log(response.data);
+        console.log('更新HASH成功: ', hash);
         nextFn && nextFn()
     })
     .catch(error => {
-        // console.log(error);
     })    
 }
 

@@ -9,6 +9,7 @@ let allHashList = []
 
 function runRemoteDataFn() {
     queryRemoteHashListFn(resList => {
+        console.log('getRemoteHash: ', resList.length)
         let hashListStr = ''
         resList.forEach(hashItem => {
             hashListStr += `${hashItem.content}\n`
@@ -20,7 +21,7 @@ function runRemoteDataFn() {
 function runLocalDataFn() {
     queryLocalHashListFn((hashList, allDataList) => {
         allHashList = allDataList
-        console.log(hashList.length)
+        console.log('getLocalHash: ', hashList.length)
         const deepRunSaveHashFn = async () => {
             if (!hashList.length) {
                 return;
@@ -30,7 +31,6 @@ function runLocalDataFn() {
                 updateRemoteHashFn(hashItem.hash, hashItem.name.replaceAll("'", '"'), hashItem.total_size || hashItem.size, 9)
                 setTimeout(() => {
                     deleteHashFn(hashItem.hash)
-                    // console.log(hashItem.hash)
                     deepRunSaveHashFn()
                 }, 860)
             } catch (error) {

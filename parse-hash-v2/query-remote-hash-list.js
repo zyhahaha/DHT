@@ -9,11 +9,9 @@ const options = {
 
 function queryRemoteHashListFn(nextFn) {
     axios(options).then(response => {
-        // console.log(response.data);
         nextFn && nextFn(response.data.data.list)
     })
     .catch(error => {
-        // console.log(error);
     })    
 }
 

@@ -11,7 +11,6 @@ function queryLocalHashListFn(nextFn) {
     const allHashList = []
     const hashList = []
     axios(options).then(response => {
-        // console.log(response.data);
         let hashMaps = response.data.torrents || {}
         for (const key in hashMaps) {
             if (Object.hasOwnProperty.call(hashMaps, key)) {
@@ -27,7 +26,6 @@ function queryLocalHashListFn(nextFn) {
         nextFn && nextFn(hashList, allHashList)
     })
     .catch(error => {
-        // console.log(error);
     })    
 }
 

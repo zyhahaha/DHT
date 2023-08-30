@@ -14,10 +14,8 @@ function addHashFn(hash) {
         data: stringifyFn(data)
     };
     axios(options).then(response => {
-        // console.log(response);
     })
     .catch(error => {
-        // console.log(error);
     })
 }
 
