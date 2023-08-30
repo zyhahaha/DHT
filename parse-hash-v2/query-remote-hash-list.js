@@ -1,7 +1,8 @@
 const axios = require('axios')
+const { remoteUrl } = require('./utils/index.js')
 
 const options = {
-    url: 'http://119.96.189.81:8877/powerful/list',
+    url: `${remoteUrl}/powerful/list`,
     method: 'POST',
     data: { pageSize: 100 }
 };

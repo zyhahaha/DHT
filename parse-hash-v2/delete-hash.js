@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { stringifyFn } = require('./utils/index.js')
+const { stringifyFn, localUrl } = require('./utils/index.js')
 
 function deleteHashFn(hash) {
     const data = {
@@ -7,7 +7,7 @@ function deleteHashFn(hash) {
         deleteFiles: true
     }
     const options = {
-        url: 'http://localhost:7788/api/v2/torrents/delete',
+        url: `${localUrl}/api/v2/torrents/delete`,
         method: 'POST',
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
         data: stringifyFn(data)

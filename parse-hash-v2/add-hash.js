@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { stringifyFn } = require('./utils/index.js')
+const { stringifyFn, localUrl } = require('./utils/index.js')
 
 function addHashFn(hash) {
     const data = {
@@ -8,7 +8,7 @@ function addHashFn(hash) {
         contentLayout: 'Original'
     }
     const options = {
-        url: 'http://localhost:7788/api/v2/torrents/add',
+        url: `${localUrl}/api/v2/torrents/add`,
         method: 'POST',
         headers: { 'content-type': 'application/x-www-form-urlencoded' },
         data: stringifyFn(data)
