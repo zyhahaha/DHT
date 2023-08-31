@@ -39,10 +39,11 @@ function runLocalDataFn() {
         }
         deepRunSaveHashFn()
 
-        const limieTime = (Date.now() / 1000 - 1200)
+        const limieTime = (Date.now() / 1000 - 60)
         unhashList = unhashList.filter(v => {
             return v.added_on < limieTime
         })
+        console.log('xxx', unhashList.length)
         const deepRunCheckHashFn = async () => {
             if (!unhashList.length) {
                 return;
