@@ -10,6 +10,7 @@ const options = {
 function queryLocalHashListFn(nextFn) {
     const allHashList = []
     const hashList = []
+    const unhashList = [] // 未下载size等于-1
     axios(options).then(response => {
         let hashMaps = response.data.torrents || {}
         for (const key in hashMaps) {
@@ -17,13 +18,14 @@ function queryLocalHashListFn(nextFn) {
                 const element = hashMaps[key];
                 element.hash = key
                 allHashList.push(element)
-                if (element.total_size < 0 || element.size < 0) {
+                if (element.total_size <= 0 || element.size <= 0) {
+                    unhashList.push(element)
                 } else {
                     hashList.push(element)
                 }
             }
         }     
-        nextFn && nextFn(hashList, allHashList)
+        nextFn && nextFn(hashList, unhashList, allHashList)
     })
     .catch(error => {
     })    

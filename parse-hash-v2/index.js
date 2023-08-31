@@ -19,14 +19,14 @@ function runRemoteDataFn() {
 }
 
 function runLocalDataFn() {
-    queryLocalHashListFn((hashList, allDataList) => {
+    queryLocalHashListFn((hashList, unhashList, allDataList) => {
         allHashList = allDataList
         console.log('getLocalHash: ', hashList.length)
         const deepRunSaveHashFn = async () => {
             if (!hashList.length) {
                 return;
             };
-            let hashItem = hashList.shift()
+            const hashItem = hashList.shift()
             try {
                 updateRemoteHashFn(hashItem.hash, hashItem.name.replaceAll("'", '"'), hashItem.total_size || hashItem.size, 9)
                 setTimeout(() => {
@@ -38,6 +38,27 @@ function runLocalDataFn() {
             }
         }
         deepRunSaveHashFn()
+
+        const limieTime = (Date.now() / 1000 - 1200)
+        unhashList = unhashList.filter(v => {
+            return v.added_on < limieTime
+        })
+        const deepRunCheckHashFn = async () => {
+            if (!unhashList.length) {
+                return;
+            };
+            const hashItem = unhashList.shift()
+            try {
+                updateRemoteHashFn(hashItem.hash, '', 0, 0)
+                setTimeout(() => {
+                    deleteHashFn(hashItem.hash)
+                    deepRunCheckHashFn()
+                }, 860)
+            } catch (error) {
+                deepRunCheckHashFn()
+            }
+        }
+        deepRunCheckHashFn()
     })    
 }
 
