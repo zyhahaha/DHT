@@ -13,3 +13,7 @@ spider.on('nodes', (nodes)=>console.log('foundNodes'))
 spider.listen(6339)
 
 ```
+
+### 相关博客
+
+https://zyhahaha.github.io/dht.html
